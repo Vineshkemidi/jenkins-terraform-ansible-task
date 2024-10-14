@@ -27,6 +27,7 @@ resource "aws_instance" "frontend" {
   ami                    = "ami-0fff1b9a61dec8a5f"
   instance_type          = "t2.micro"
   subnet_id              = "subnet-037de641e94fec082"
+  vpc_security_group_ids = ["sg-014aedfb0d32187f2"]
   associate_public_ip_address = true
   tags = {
     Name = "c8.local"
