@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_instance" "backend" { #ubuntu.yaml NETADATA
+resource "aws_instance" "backend" { 
   ami                    = "ami-005fc0f236362e99f"
   instance_type          = "t2.micro" 
   key_name               = "ubuntu-key"
@@ -23,7 +23,7 @@ EOF
 
 }
 
-resource "aws_instance" "frontend" { #amazon-playbook.yaml NGINX
+resource "aws_instance" "frontend" { 
   ami                    = "ami-0fff1b9a61dec8a5f"
   instance_type          = "t2.micro"
   key_name               = "linux"
