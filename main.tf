@@ -26,7 +26,6 @@ EOF
 resource "aws_instance" "frontend" { #amazon-playbook.yaml NGINX
   ami                    = "ami-0fff1b9a61dec8a5f"
   instance_type          = "t2.micro"
-  vpc_id                 = "vpc-08e1b2044671bc0e0"
   key_name               = "linux"
   subnet_id              = "subnet-037de641e94fec082"
   tags = {
