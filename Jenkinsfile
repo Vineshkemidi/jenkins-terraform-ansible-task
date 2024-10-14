@@ -12,20 +12,30 @@ pipeline {
             }
         }
         
-        stage('Terraform Apply') {
-            steps {
-                script {
-                    dir('/var/lib/jenkins/workspace/Ansible-1/jenkins-terraform-ansible-task') {
+       stage('Terraform Apply') {
+    steps {
+        script {
+            dir('/var/lib/jenkins/workspace/Ansible-1/jenkins-terraform-ansible-task') {
+                // Use withCredentials to securely access AWS credentials
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', 
+                                 credentialsId: 'aws_credentials', 
+                                 usernameVariable: 'AWS_ACCESS_KEY_ID', 
+                                 passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    // Set AWS region if needed
+                    env.AWS_DEFAULT_REGION = 'us-east-1'
+                    
+                    // Execute Terraform commands
                     sh 'pwd'
                     sh 'terraform init'
                     sh 'terraform validate'
                     // sh 'terraform destroy -auto-approve'
                     sh 'terraform plan'
                     sh 'terraform apply -auto-approve'
-                    }
                 }
             }
         }
+    }
+}
         
         stage('Ansible Deployment') {
             steps {
